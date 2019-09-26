@@ -6,6 +6,6 @@
     SELECT * FROM admin WHERE id = #{id}
   </select>
   <select id="findAdminByName" resultType="Admin">
-    SELECT * FROM admin WHERE name LIKE #{name}
+    SELECT * FROM admin WHERE name LIKE %#{name}%
   </select>
 </mapper>

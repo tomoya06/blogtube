@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heavelop.blogtube.dao.ArticleDao">
+  <insert id="new">
+    INSERT INTO article
+    <choose>
+      <when test="channel_id != null">
+        (title, content, user_id, channel_id)
+        VALUE
+        (#{title}, #{content}, #{userId}, #{channel_id})
+      </when>
+      <otherwise>
+        (title, content, user_id)
+        VALUE
+        (#{title}, #{content}, #{userId})
+      </otherwise>
+    </choose>
+  </insert>
+</mapper>
