@@ -27,6 +27,14 @@ public class CommonResult<T> {
     );
   }
 
+  public static CommonResult<String> forbidden(String message) {
+    return new CommonResult<String>(
+      ResultCode.FORBIDDEN.getCode(), 
+      ResultCode.FORBIDDEN.getMessage(), 
+      message
+    );
+  }
+
   public T getData() {
     return Data;
   }
