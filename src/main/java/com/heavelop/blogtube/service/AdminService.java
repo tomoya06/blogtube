@@ -1,7 +1,5 @@
 package com.heavelop.blogtube.service;
 
-import java.util.List;
-
 import com.heavelop.blogtube.dao.AdminDao;
 import com.heavelop.blogtube.model.Admin;
 
@@ -17,7 +15,7 @@ public class AdminService {
     return adminDao.findAdminByID(id);
   }
 
-  public List<Admin> findAdminByName(String name) {
+  public Admin findAdminByName(String name) {
     return adminDao.findAdminByName(name);
   }
 } 

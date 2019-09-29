@@ -1,7 +1,5 @@
 package com.heavelop.blogtube.controller;
 
-import java.util.List;
-
 import com.heavelop.blogtube.common.api.CommonResult;
 import com.heavelop.blogtube.model.Admin;
 import com.heavelop.blogtube.service.AdminService;
@@ -23,7 +21,7 @@ public class AdminController {
   }
 
   @RequestMapping("/name")
-  public CommonResult<List<Admin>> findAdminByName(@RequestParam(value = "name") String name) {
-    return CommonResult.success(adminService.findAdminByName(name)); 
+  public CommonResult<Admin> findAdminByName(@RequestParam(value = "name") String name) {
+    return CommonResult.success(adminService.findAdminByName(name));
   }
 }

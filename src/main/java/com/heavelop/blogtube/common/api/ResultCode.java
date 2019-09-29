@@ -1,9 +1,10 @@
 package com.heavelop.blogtube.common.api;
 
 public enum ResultCode {
-  SUCCESS(200, "success"), 
+  SUCCESS(200, "success"),
   FAILED(500, "error"),
-  FORBIDDEN(403, "forbidden");
+  FORBIDDEN(403, "forbidden"),
+  NOTFOUND(404, "not found");
 
   private final int code;
   private final String message;
