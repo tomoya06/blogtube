@@ -13,6 +13,9 @@ jwt:
   expiration: 604800
   tokenHeader: Authorization
   tokenHead: Bearer
+  claim:
+    username: sub
+    created: iat
 
 mybatis:
   config-location: classpath:config/mybatis-config.xml

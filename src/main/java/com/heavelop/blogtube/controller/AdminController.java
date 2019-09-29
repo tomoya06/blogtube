@@ -1,13 +1,14 @@
 package com.heavelop.blogtube.controller;
 
-import java.util.List;
-
 import com.heavelop.blogtube.common.api.CommonResult;
+import com.heavelop.blogtube.dto.UserLoginParam;
 import com.heavelop.blogtube.model.Admin;
 import com.heavelop.blogtube.service.AdminService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,7 +24,13 @@ public class AdminController {
   }
 
   @RequestMapping("/name")
-  public CommonResult<List<Admin>> findAdminByName(@RequestParam(value = "name") String name) {
-    return CommonResult.success(adminService.findAdminByName(name)); 
+  public CommonResult<Admin> findAdminByName(@RequestParam(value = "name") String name) {
+    return CommonResult.success(adminService.findAdminByName(name));
+  }
+
+  @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
+  public CommonResult<String> login(@RequestBody UserLoginParam userLoginParam) {
+    String result = adminService.login(userLoginParam.getUsername(), userLoginParam.getPassword());
+    return CommonResult.success(result);
   }
 }

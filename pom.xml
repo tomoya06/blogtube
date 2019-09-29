@@ -52,11 +52,11 @@
       <artifactId>spring-boot-starter-web</artifactId>
       <scope>compile</scope>
     </dependency>
-    <!-- Springboot Security -->
+    <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-security -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-security</artifactId>
-      <scope>compile</scope>
+      <version>2.1.8.RELEASE</version>
     </dependency>
     <!-- JWT -->
     <dependency>
@@ -75,6 +75,12 @@
         <artifactId>jjwt-jackson</artifactId>
         <version>0.10.7</version>
         <scope>runtime</scope>
+    </dependency>
+    <!-- HUTOOL -->
+    <dependency>
+      <groupId>cn.hutool</groupId>
+      <artifactId>hutool-all</artifactId>
+      <version>4.6.7</version>
     </dependency>
   </dependencies>
   <build>

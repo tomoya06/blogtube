@@ -16,13 +16,16 @@ import io.jsonwebtoken.security.Keys;
 
 @Component
 public class JwtTokenUtil {
-  private static final String CLAIM_KEY_USERNAME = "sub";
-  private static final String CLAIM_KEY_CREATED = "iat";
-  private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
+  @Value("${jwt.claim.username}")
+  private String CLAIM_KEY_USERNAME;
+  @Value("${jwt.claim.created}")
+  private String CLAIM_KEY_CREATED;
   @Value("${jwt.secret}")
   private String secret;
   @Value("${jwt.expiration}")
   private Long expiration;
+  
+  private Key key = Keys.secretKeyFor(SignatureAlgorithm.HS512);
   
   public String getUserNameFromToken(String token) {
     Claims claims = getClaimsFromToken(token);
@@ -51,7 +54,7 @@ public class JwtTokenUtil {
   private Claims getClaimsFromToken(String token) {
     return Jwts.parser()
       .setSigningKey(key)
-      .parseClaimsJwt(token)
+      .parseClaimsJws(token)
       .getBody();
   }
   

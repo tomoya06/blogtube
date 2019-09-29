@@ -1,4 +1,4 @@
-package com.heavelop.blogtube.controller;
+package com.heavelop.blogtube.component;
 
 import com.heavelop.blogtube.common.api.CommonResult;
 
@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @ControllerAdvice
 @ResponseBody
-public class ExceptionController {
+public class GlobalExceptionHandler {
   @ExceptionHandler
   public CommonResult<String> commonExceptionHandler(DuplicateKeyException exception) {
     return CommonResult.failed("主键重复");
