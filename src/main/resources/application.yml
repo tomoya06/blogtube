@@ -8,12 +8,6 @@ spring:
     username: root
     password: root
 
-jwt:
-  secret: tomoyaHasASecretKey
-  expiration: 604800
-  tokenHeader: Authorization
-  tokenHead: Bearer
-
 mybatis:
   config-location: classpath:config/mybatis-config.xml
   mapper-locations:
