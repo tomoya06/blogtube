@@ -2,6 +2,7 @@ package com.heavelop.blogtube.service;
 
 import com.heavelop.blogtube.common.util.JwtTokenUtil;
 import com.heavelop.blogtube.dao.AdminDao;
+import com.heavelop.blogtube.dto.AdminAuthDetails;
 import com.heavelop.blogtube.model.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class AdminService {
-  @Autowired
-  private AdminAuthDetailsService userDetailsService;
   @Autowired
   private JwtTokenUtil jwtTokenUtil;
   @Autowired
@@ -43,7 +42,7 @@ public class AdminService {
 
   public String login(String username, String password) {
     String token = null;
-    UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+    UserDetails userDetails = new AdminAuthDetails(this.findAdminByName(username));
     if (!userDetails.getPassword().equals(password)) {
       throw new BadCredentialsException("invalid password");
     }

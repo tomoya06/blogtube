@@ -83,6 +83,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     return new JwtAuthenticationTokenFilter();
   }
 
+  @Bean
   public UserDetailsService userDetailsService() {
     return username -> {
       Admin admin = adminService.findAdminByName(username);
