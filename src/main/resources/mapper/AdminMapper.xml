@@ -3,9 +3,22 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heavelop.blogtube.dao.AdminDao">
   <select id="findAdminByID" resultType="Admin">
-    SELECT * FROM user WHERE id = #{id}
+    SELECT * FROM user WHERE id = #{id} AND role = 1
   </select>
   <select id="findAdminByName" resultType="Admin">
     SELECT * FROM user WHERE username = #{username} AND role = 1
   </select>
+  <insert id="registerAdmin">
+    INSERT INTO user
+    (username, password, role)
+    VALUES
+    (#{username}, #{password}, 1)
+  </insert>
+  <update id="resetPassword">
+    UPDATE user
+    SET
+      password = #{newPassword}
+    WHERE
+      username = #{username} AND password = #{oldPassword}
+  </update>
 </mapper>
