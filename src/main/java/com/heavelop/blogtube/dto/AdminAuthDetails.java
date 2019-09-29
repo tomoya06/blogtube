@@ -15,6 +15,7 @@ import lombok.Data;
 
 @Data
 public class AdminAuthDetails implements UserDetails {
+  private static final long serialVersionUID = -4095235947092839904L;
   private Admin admin;
   private List<SimpleGrantedAuthority> permissionList;
 

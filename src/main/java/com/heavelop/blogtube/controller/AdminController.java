@@ -44,6 +44,7 @@ public class AdminController {
   }
 
   @RequestMapping(value = "/reset_password", method = RequestMethod.POST, consumes = "application/json")
+  @PreAuthorize("#param.username == authentication.name")
   public CommonResult<Boolean> resetPassword(@RequestBody UserResetPasswordParam param) {
     if (adminService.isUsernameAndPasswordMatched(param.getUsername(), param.getOldPassword())) {
       adminService.resetPassword(param.getUsername(), param.getOldPassword(), param.getNewPassword());

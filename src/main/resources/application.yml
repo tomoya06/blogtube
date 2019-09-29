@@ -10,7 +10,7 @@ spring:
 
 jwt:
   secret: tomoyaHasASecretKey
-  expiration: 604800
+  expiration: 604800 # = 7*24*60*60
   tokenHeader: Authorization
   tokenHead: Bearer
   claim:
