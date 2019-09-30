@@ -4,7 +4,7 @@ import com.heavelop.blogtube.common.api.ResultCode;
 import com.heavelop.blogtube.component.JwtAuthenticationTokenFilter;
 import com.heavelop.blogtube.component.RestfulAccessDeniedHandler;
 import com.heavelop.blogtube.component.RestfulAuthenticationEntryPoint;
-import com.heavelop.blogtube.dto.AdminAuthDetails;
+import com.heavelop.blogtube.bo.AdminAuthDetails;
 import com.heavelop.blogtube.model.Admin;
 import com.heavelop.blogtube.service.AdminService;
 

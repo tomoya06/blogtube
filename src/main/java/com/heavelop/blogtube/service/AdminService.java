@@ -2,7 +2,7 @@ package com.heavelop.blogtube.service;
 
 import com.heavelop.blogtube.common.util.JwtTokenUtil;
 import com.heavelop.blogtube.dao.AdminDao;
-import com.heavelop.blogtube.dto.AdminAuthDetails;
+import com.heavelop.blogtube.bo.AdminAuthDetails;
 import com.heavelop.blogtube.model.Admin;
 
 import org.springframework.beans.factory.annotation.Autowired;

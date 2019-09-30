@@ -1,4 +1,4 @@
-package com.heavelop.blogtube.dto;
+package com.heavelop.blogtube.bo;
 
 import java.util.ArrayList;
 import java.util.Collection;
