@@ -1,12 +1,12 @@
 package com.heavelop.blogtube.config;
 
+import com.heavelop.blogtube.bo.UserAuthDetails;
 import com.heavelop.blogtube.common.api.ResultCode;
 import com.heavelop.blogtube.component.JwtAuthenticationTokenFilter;
 import com.heavelop.blogtube.component.RestfulAccessDeniedHandler;
 import com.heavelop.blogtube.component.RestfulAuthenticationEntryPoint;
-import com.heavelop.blogtube.bo.AdminAuthDetails;
-import com.heavelop.blogtube.model.Admin;
-import com.heavelop.blogtube.service.AdminService;
+import com.heavelop.blogtube.model.User;
+import com.heavelop.blogtube.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -29,7 +29,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
-  private AdminService adminService;
+  private UserService userService;
   @Autowired
   private RestfulAuthenticationEntryPoint authenticationEntryPoint;
   @Autowired
@@ -48,13 +48,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/",
         "/*.html",
         "/favicon.ico",
+        "/img/*",
         "/**/*.html",
         "/**/*.css",
         "/**/*.js",
-        "/**/*.png"
+        "/swagger-resources/**",
+        "/v2/api-docs/**"
       )
-      .permitAll()
-      .antMatchers("/admin/login", "/admin/register")
       .permitAll()
       .antMatchers("/user/login", "/user/register")
       .permitAll()
@@ -89,9 +89,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Bean
   public UserDetailsService userDetailsService() {
     return username -> {
-      Admin admin = adminService.findAdminByName(username);
-      if (admin != null) {
-        return new AdminAuthDetails(admin);
+      User user = userService.findUserByName(username);
+      if (user != null) {
+        return new UserAuthDetails(user);
       }
       throw new UsernameNotFoundException(ResultCode.NOTFOUND.getMessage());
     };

@@ -10,7 +10,7 @@ public class User {
   private String bio;
   private String createdTime;
   private String lastLoginTime;
-  private String role;
+  private Integer role;
   private String rank;
   private String userId;
   private String email;

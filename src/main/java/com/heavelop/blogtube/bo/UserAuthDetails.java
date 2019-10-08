@@ -5,7 +5,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.heavelop.blogtube.common.api.UserRole;
-import com.heavelop.blogtube.model.Admin;
+import com.heavelop.blogtube.model.User;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,15 +14,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import lombok.Data;
 
 @Data
-public class AdminAuthDetails implements UserDetails {
+public class UserAuthDetails implements UserDetails {
   private static final long serialVersionUID = -4095235947092839904L;
-  private Admin admin;
+  private User user;
   private List<SimpleGrantedAuthority> permissionList;
 
-  public AdminAuthDetails(Admin admin) {
-    this.admin = admin;
+  public UserAuthDetails(User user) {
+    this.user = user;
     this.permissionList = new ArrayList<>();
-    permissionList.add(new SimpleGrantedAuthority(UserRole.getMessage(admin.getRole())));
+    permissionList.add(new SimpleGrantedAuthority(UserRole.getMessage(user.getRole())));
   }
 
   @Override
@@ -32,7 +32,7 @@ public class AdminAuthDetails implements UserDetails {
 
   @Override
   public String getPassword() {
-    return this.admin.getPassword();
+    return this.user.getPassword();
   }
 
   @Override
@@ -57,6 +57,6 @@ public class AdminAuthDetails implements UserDetails {
 
   @Override
   public String getUsername() {
-    return this.admin.getUsername();
+    return this.user.getUsername();
   }
 }

@@ -7,7 +7,6 @@
     <setting name="mapUnderscoreToCamelCase" value="true" />
   </settings>
   <typeAliases>
-    <typeAlias type="com.heavelop.blogtube.model.Admin" alias="Admin"/>
     <typeAlias type="com.heavelop.blogtube.model.User" alias="User"/>
   </typeAliases>
 </configuration>

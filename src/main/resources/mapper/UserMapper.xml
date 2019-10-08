@@ -8,4 +8,7 @@
     VALUE
     (#{username}, #{password})
   </insert>
+  <select id="findUserByName" resultType="User">
+    SELECT * FROM user WHERE username = #{username}
+  </select>
 </mapper>

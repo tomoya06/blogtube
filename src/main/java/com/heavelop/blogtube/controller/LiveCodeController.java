@@ -6,10 +6,14 @@ import com.heavelop.blogtube.service.LiveCodeService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import io.swagger.annotations.Api;
+
+@Api(tags = "LiveCodeController", description = "Live Code Operations")
 @RestController
 @RequestMapping("/code")
 public class LiveCodeController {
@@ -25,7 +29,7 @@ public class LiveCodeController {
   @Value("${mail.liveCode.content.suffix}")
   private String emailContentSuffix;
 
-  @RequestMapping("/new")
+  @GetMapping("/new")
   public CommonResult<Boolean> generateAndSendCode(@RequestParam String email) {
     String newCode = liveCodeService.generateCode(email);
     String emailContent = emailContentPrefix + newCode + emailContentSuffix;
@@ -33,7 +37,7 @@ public class LiveCodeController {
     return CommonResult.success(true);
   }
 
-  @RequestMapping("/validate")
+  @GetMapping("/validate")
   public CommonResult<Boolean> validateCode(@RequestParam String email, @RequestParam String code) {
     return CommonResult.success(liveCodeService.validateCode(email, code));
   }
