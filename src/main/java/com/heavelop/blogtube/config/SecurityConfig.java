@@ -50,7 +50,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         "/favicon.ico",
         "/**/*.html",
         "/**/*.css",
-        "/**/*.js"
+        "/**/*.js",
+        "/**/*.png"
       )
       .permitAll()
       .antMatchers("/admin/login", "/admin/register")
