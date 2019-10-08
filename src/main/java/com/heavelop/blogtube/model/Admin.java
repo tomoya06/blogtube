@@ -10,4 +10,5 @@ public class Admin {
   private Integer role;
   private String adminId;
   private String bio;
+  private String email;
 }

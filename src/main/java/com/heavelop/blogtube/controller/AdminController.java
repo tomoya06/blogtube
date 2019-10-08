@@ -21,15 +21,15 @@ public class AdminController {
   @Autowired
   private AdminService adminService;
 
-  @RequestMapping("/test")
-  public CommonResult<Admin> testQuery() {
-    return CommonResult.success(adminService.findAdminByID(1));    
-  }
+  // @RequestMapping("/test")
+  // public CommonResult<Admin> testQuery() {
+  //   return CommonResult.success(adminService.findAdminByID(1));    
+  // }
 
-  @RequestMapping("/name")
-  public CommonResult<Admin> findAdminByName(@RequestParam(value = "name") String name) {
-    return CommonResult.success(adminService.findAdminByName(name));
-  }
+  // @RequestMapping("/name")
+  // public CommonResult<Admin> findAdminByName(@RequestParam(value = "name") String name) {
+  //   return CommonResult.success(adminService.findAdminByName(name));
+  // }
 
   @RequestMapping(value = "/login", method = RequestMethod.POST, consumes = "application/json")
   public CommonResult<String> login(@RequestBody UserLoginParam userLoginParam) {

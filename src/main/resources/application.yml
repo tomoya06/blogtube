@@ -11,6 +11,28 @@ spring:
   redis:
     host: localhost
     port: 6379
+    database: 0
+    password: 
+
+  mail:
+    host: smtp.163.com
+    username: peng-jiahui@163.com
+    password: peng-476612
+
+redis:
+  key:
+    prefix:
+      liveCode: "blogtube:livecode:"
+    expire:
+      liveCode: 120
+
+mail:
+  liveCode:
+    subject: "BlogTube验证码"
+    content: 
+      prefix: "您的验证码为："
+      suffix: "。2分钟内有效。"
+    
 
 jwt:
   secret: tomoyaHasASecretKey

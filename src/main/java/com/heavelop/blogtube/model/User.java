@@ -5,6 +5,7 @@ import lombok.Data;
 @Data
 public class User {
   private String username;
+  private String password;
   private String avatarUrl;
   private String bio;
   private String createdTime;
@@ -12,6 +13,7 @@ public class User {
   private String role;
   private String rank;
   private String userId;
+  private String email;
   private Integer isBanned;
   private Integer isCanceled;
 }
