@@ -6,7 +6,7 @@ import lombok.Data;
 public class User {
   private String username;
   private String password;
-  private String createdTime;
+  private Integer createdTime;
   private String email;
   private Integer role;
   private Integer isBanned;
