@@ -6,14 +6,8 @@ import lombok.Data;
 public class User {
   private String username;
   private String password;
-  private String avatarUrl;
-  private String bio;
   private String createdTime;
-  private String lastLoginTime;
-  private Integer role;
-  private String rank;
-  private String userId;
   private String email;
+  private Integer role;
   private Integer isBanned;
-  private Integer isCanceled;
 }
