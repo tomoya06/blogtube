@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
@@ -21,15 +20,13 @@ public class UserController {
   @Autowired
   private UserService userService;
   
-  @PostMapping(value = "/register", consumes = "application/json")
-  @ResponseBody
+  @PostMapping(value = "/register", consumes = "application/form")
   public CommonResult<Boolean> register(@RequestBody UserRegisterParam userRegisterParam) {
     userService.registerUser(userRegisterParam);
     return CommonResult.success(true);
   }
 
-  @PostMapping(value = "/login", consumes = "application/json")
-  @ResponseBody
+  @PostMapping(value = "/login", consumes = "application/form")
   public CommonResult<String> login(@RequestBody UserLoginParam userLoginParam) {
     return CommonResult.success("GOOD");
   }

@@ -6,8 +6,8 @@ import lombok.Data;
 public class User {
   private String username;
   private String password;
-  private Integer createdTime;
+  private Long createdTime;
   private String email;
   private Integer role;
-  private Integer isBanned;
+  private Boolean isBanned;
 }

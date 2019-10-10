@@ -4,11 +4,11 @@ import lombok.Data;
 
 @Data
 public class Dialogue {
-  private Integer msgId;
+  private Long msgId;
   private String content;
-  private Integer createTime;
+  private Long createTime;
   private Integer type;
-  private Integer creatorId;
+  private Long creatorId;
   private Integer visit;
   private Boolean isBanned;
 }

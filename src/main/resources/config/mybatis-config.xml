@@ -8,5 +8,6 @@
   </settings>
   <typeAliases>
     <typeAlias type="com.heavelop.blogtube.model.User" alias="User"/>
+    <typeAlias type="com.heavelop.blogtube.model.Dialogue" alias="Dialogue"/>
   </typeAliases>
 </configuration>

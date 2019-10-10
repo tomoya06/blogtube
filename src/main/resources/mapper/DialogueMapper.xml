@@ -7,4 +7,9 @@
     ORDER BY RAND()
     LIMIT 1
   </select>
+  <select id="fetchRandomBatch" resultType="Dialogue">
+    SELECT * FROM dialogue
+    ORDER BY RAND()
+    LIMIT #{count}
+  </select>
 </mapper>

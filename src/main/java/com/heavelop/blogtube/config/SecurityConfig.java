@@ -60,6 +60,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .permitAll()
       .antMatchers("/code/**")
       .permitAll()
+      .antMatchers("/dialogue/**")
+      .permitAll()
       .anyRequest()
       .authenticated();
     
