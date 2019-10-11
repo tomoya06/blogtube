@@ -3,6 +3,7 @@ package com.heavelop.blogtube.controller;
 import com.heavelop.blogtube.common.api.CommonResult;
 import com.heavelop.blogtube.service.EmailService;
 import com.heavelop.blogtube.service.LiveCodeService;
+import com.heavelop.blogtube.service.UserService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,6 +22,8 @@ public class LiveCodeController {
   private LiveCodeService liveCodeService;
   @Autowired
   private EmailService emailService;
+  @Autowired
+  private UserService userService;
 
   @Value("${mail.liveCode.subject}")
   private String emailSubject;
@@ -37,8 +40,9 @@ public class LiveCodeController {
     return CommonResult.success(true);
   }
 
-  @GetMapping("/validate")
-  public CommonResult<Boolean> validateCode(@RequestParam String email, @RequestParam String code) {
-    return CommonResult.success(liveCodeService.validateCode(email, code));
+  @GetMapping("/login")
+  public CommonResult<String> validateCode(@RequestParam String email, @RequestParam String code) {
+    String result = userService.loginWithEmailAndLiveCode(email, code);
+    return CommonResult.success(result);
   }
 }

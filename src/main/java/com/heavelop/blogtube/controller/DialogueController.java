@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.heavelop.blogtube.common.api.CommonResult;
+import com.heavelop.blogtube.common.api.RegExp;
 import com.heavelop.blogtube.dto.DialogueSubmitParam;
 import com.heavelop.blogtube.model.Dialogue;
 import com.heavelop.blogtube.service.DialogueService;
@@ -39,13 +40,13 @@ public class DialogueController {
   @PostMapping(value = "/submit", consumes = "application/json")
   @ResponseBody
   public CommonResult<Object> publicSubmit(@RequestBody DialogueSubmitParam dialogueSubmitParam) {
-    if (dialogueSubmitParam.getCreatorEmail() == null) {
-      return CommonResult.failed("No Email");
+    if (!RegExp.email.matches(dialogueSubmitParam.getCreatorEmail())) {
+      return CommonResult.bad("email");
     }
     dialogueService.publicSubmit(
-      dialogueSubmitParam.getContent(), 
+      dialogueSubmitParam.getContent(),
       dialogueSubmitParam.getType(),
-      dialogueSubmitParam.getCreatorEmail()  
+      dialogueSubmitParam.getCreatorEmail()
     );
     return CommonResult.success(true);
   }

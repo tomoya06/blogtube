@@ -25,6 +25,9 @@ public class UserService {
   private UserRoleDao userRoleDao;
 
   @Autowired
+  private LiveCodeService liveCodeService;
+
+  @Autowired
   private JwtTokenUtil jwtTokenUtil;
 
   private void injectUserRolename(User user) {
@@ -50,15 +53,42 @@ public class UserService {
     return userRoleDao.findUserRole(id);
   }
 
+  private String generateToken(UserDetails userDetails) {
+    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+    String token = jwtTokenUtil.generateToken(userDetails);
+    return token;
+  }
+
   public void registerUser(String username, String password, String email) {
     Long createTime = (new Date()).getTime();
     userDao.registerUser(username, password, email, createTime);
   }
+
+  /**
+   * Login With Live Code
+   * @param email
+   * @param code
+   * @return
+   */
+  public String loginWithEmailAndLiveCode(String email, String code) {
+    Boolean validateResult = liveCodeService.validateCode(email, code);
+    if (!validateResult) {
+      throw new BadCredentialsException("");
+    }
+    User targetUser = this.findUserByEmail(email);
+    UserDetails userDetails = new UserAuthDetails(targetUser);
+    return this.generateToken(userDetails);
+  }
   
+  /**
+   * Login With Username or Email
+   * @param username
+   * @param password
+   * @return
+   */
   public String login(String username, String password) {
-    String token = null;
     User targetUser;
-    // SUPPORT USERNAME OR EMAIL
     if (RegExp.email.matches(username)) {
       targetUser = this.findUserByEmail(username);
     } else {
@@ -71,9 +101,6 @@ public class UserService {
     if (!userDetails.getPassword().equals(password)) {
       throw new BadCredentialsException("");
     }
-    UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
-    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
-    token = jwtTokenUtil.generateToken(userDetails);
-    return token;
+    return this.generateToken(userDetails);
   }
 }
