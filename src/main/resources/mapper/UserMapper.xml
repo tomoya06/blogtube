@@ -4,11 +4,14 @@
 <mapper namespace="com.heavelop.blogtube.dao.UserDao">
   <insert id="registerUser">
     INSERT INTO user 
-    (username, password)
-    VALUE
-    (#{username}, #{password})
+    (username, password, email, createTime)
+    VALUES
+    (#{username}, #{password}, #{email}, #{createTime})
   </insert>
   <select id="findUserByName" resultType="User">
     SELECT * FROM user WHERE username = #{username}
+  </select>
+  <select id="findUserByEmail" resultType="User">
+    SELECT * FROM user WHERE email = #{email}
   </select>
 </mapper>

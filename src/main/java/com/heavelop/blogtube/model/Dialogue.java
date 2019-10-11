@@ -9,6 +9,7 @@ public class Dialogue {
   private Long createTime;
   private Integer type;
   private Long creatorId;
+  private String creatorEmail;
   private Integer visit;
   private Boolean isBanned;
 }

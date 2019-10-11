@@ -3,6 +3,7 @@ package com.heavelop.blogtube.common.api;
 public enum ResultCode {
   SUCCESS(200, "success"),
   FAILED(500, "error"),
+  BAD(400, "bad request"),
   FORBIDDEN(403, "forbidden"),
   NOTFOUND(404, "not found");
 

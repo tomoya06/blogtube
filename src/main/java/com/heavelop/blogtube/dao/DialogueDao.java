@@ -11,5 +11,5 @@ import org.apache.ibatis.annotations.Mapper;
 public interface DialogueDao {
   Map<String, Object> fetchRandom();
   List<Dialogue> fetchRandomBatch(Integer count);
-  void submit(String content, Integer type, Long createTime, Long creatorId);
+  void submit(String content, Integer type, Long createTime, Long creatorId, String creatorEmail);
 }

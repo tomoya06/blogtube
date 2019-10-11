@@ -60,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
       .permitAll()
       .antMatchers("/code/**")
       .permitAll()
-      .antMatchers("/dialogue/**")
+      .antMatchers("/dialogue/public/**")
       .permitAll()
       .anyRequest()
       .authenticated();

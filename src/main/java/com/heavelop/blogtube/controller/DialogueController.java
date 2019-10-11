@@ -9,7 +9,6 @@ import com.heavelop.blogtube.model.Dialogue;
 import com.heavelop.blogtube.service.DialogueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,9 +19,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.annotations.Api;
 
-@Api(tags = "LiveCodeController", description = "Live Code Operations")
+@Api(tags = "Dialogue for Public", description = "Dialogue Controller without Login")
 @RestController
-@RequestMapping("/dialogue")
+@RequestMapping("/dialogue/public")
 public class DialogueController {
   @Autowired
   private DialogueService dialogueService;
@@ -39,22 +38,15 @@ public class DialogueController {
 
   @PostMapping(value = "/submit", consumes = "application/json")
   @ResponseBody
-  public CommonResult<Object> submit(@RequestBody DialogueSubmitParam dialogueSubmitParam) {
-    if (dialogueSubmitParam.getCreatorEmail() == null && dialogueSubmitParam.getCreatorId() == null) {
-      return CommonResult.failed("Missing Creator Credit");
+  public CommonResult<Object> publicSubmit(@RequestBody DialogueSubmitParam dialogueSubmitParam) {
+    if (dialogueSubmitParam.getCreatorEmail() == null) {
+      return CommonResult.failed("No Email");
     }
-    if (dialogueSubmitParam.getCreatorId() == null) {
-      dialogueService.submit(
-        dialogueSubmitParam.getContent(), 
-        dialogueSubmitParam.getType()
-      );
-    } else {
-      dialogueService.submit(
-        dialogueSubmitParam.getContent(), 
-        dialogueSubmitParam.getType(), 
-        dialogueSubmitParam.getCreatorId()
-      );
-    }
+    dialogueService.publicSubmit(
+      dialogueSubmitParam.getContent(), 
+      dialogueSubmitParam.getType(),
+      dialogueSubmitParam.getCreatorEmail()  
+    );
     return CommonResult.success(true);
   }
 }

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.heavelop.blogtube.common.api.UserRole;
 import com.heavelop.blogtube.model.User;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -18,11 +17,11 @@ public class UserAuthDetails implements UserDetails {
   private static final long serialVersionUID = -4095235947092839904L;
   private User user;
   private List<SimpleGrantedAuthority> permissionList;
-
+  
   public UserAuthDetails(User user) {
     this.user = user;
     this.permissionList = new ArrayList<>();
-    permissionList.add(new SimpleGrantedAuthority(UserRole.getMessage(user.getRole())));
+    this.permissionList.add(new SimpleGrantedAuthority(user.getRolename()));
   }
 
   @Override

@@ -23,13 +23,16 @@ public class DialogueService {
     return dialogueDao.fetchRandomBatch(count);
   }
 
-  public void submit(String content, Integer type) {
-    Long creatorId = 0l;
-    this.submit(content, type, creatorId);
+  public void registeredUserSubmit(String content, Integer type, Long creatorId) {
+    this.submit(content, type, creatorId, null);
+  }
+
+  public void publicSubmit(String content, Integer type, String creatorEmail) {
+    this.submit(content, type, -1l, creatorEmail);
   }
   
-  public void submit(String content, Integer type, Long creatorId) {
+  private void submit(String content, Integer type, Long creatorId, String creatorEmail) {
     Long createTime = new Date().getTime();
-    dialogueDao.submit(content, type, createTime, creatorId);
+    dialogueDao.submit(content, type, createTime, creatorId, creatorEmail);
   }
 }
