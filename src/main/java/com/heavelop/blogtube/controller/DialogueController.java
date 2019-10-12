@@ -14,6 +14,7 @@ import com.heavelop.blogtube.model.Dialogue;
 import com.heavelop.blogtube.model.DialogueFull;
 import com.heavelop.blogtube.service.BravoService;
 import com.heavelop.blogtube.service.DialogueService;
+import com.vdurmont.emoji.EmojiManager;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -76,8 +77,11 @@ public class DialogueController {
   @PostMapping(value = "/bravo", consumes = "application/json")
   @ResponseBody
   public CommonResult<Object> publicBravo(@RequestBody DialogueBravoParam param, HttpServletRequest request) {
-    String creatorIP = request.getRemoteAddr();
     String content = param.getContent();
+    if (!EmojiManager.isEmoji(content)) {
+      return CommonResult.bad("emoji");
+    }
+    String creatorIP = request.getRemoteAddr();
     Long targetId = param.getTargetId();
     bravoService.addBravo(null, null, creatorIP, content, targetId);
     return CommonResult.success(true);
