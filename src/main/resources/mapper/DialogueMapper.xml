@@ -4,12 +4,21 @@
 <mapper namespace="com.heavelop.blogtube.dao.DialogueDao">
   <select id="fetchRandom" resultType="map">
     SELECT * FROM dialogue
+    <if test="type != null">
+      WHERE type = ${type}
+    </if>
     ORDER BY RAND()
     LIMIT 1
   </select>
   <select id="fetchRandomBatch" resultType="Dialogue">
     SELECT * FROM dialogue
+    <if test="type != null">
+      WHERE type = ${type}
+    </if>
     ORDER BY RAND()
     LIMIT #{count}
+  </select>
+  <select id="fetchBatchByUser" resultType="Dialogue">
+    SELECT * FROM 
   </select>
 </mapper>

@@ -15,12 +15,12 @@ public class DialogueService {
   @Autowired
   private DialogueDao dialogueDao;
   
-  public Map<String, Object> fetchRandom() {
-    return dialogueDao.fetchRandom();
+  public Map<String, Object> fetchRandom(Integer type) {
+    return dialogueDao.fetchRandom(type);
   }
 
-  public List<Dialogue> fetchRandomBatch(Integer count) {
-    return dialogueDao.fetchRandomBatch(count);
+  public List<Dialogue> fetchRandomBatch(Integer count, Integer type) {
+    return dialogueDao.fetchRandomBatch(count, type);
   }
 
   public void registeredUserSubmit(String content, Integer type, Long creatorId) {

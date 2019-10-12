@@ -28,13 +28,18 @@ public class DialogueController {
   private DialogueService dialogueService;
 
   @GetMapping("/random")
-  public CommonResult<Map<String, Object>> random() {
-    return CommonResult.success(dialogueService.fetchRandom());
+  public CommonResult<Map<String, Object>> random(
+    @RequestParam(required = false) Integer type
+  ) {
+    return CommonResult.success(dialogueService.fetchRandom(type));
   }
 
   @GetMapping("/random/batch")
-  public CommonResult<List<Dialogue>> randomBatch(@RequestParam Integer count) {
-    return CommonResult.success(dialogueService.fetchRandomBatch(count));
+  public CommonResult<List<Dialogue>> randomBatch(
+    @RequestParam Integer count,
+    @RequestParam(required = false) Integer type
+  ) {
+    return CommonResult.success(dialogueService.fetchRandomBatch(count, type));
   }
 
   @PostMapping(value = "/submit", consumes = "application/json")
