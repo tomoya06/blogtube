@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.heavelop.blogtube.dao.BravoDao">
+  <select id="fetchBravosByDialogue" resultType="Bravo">
+    SELECT
+    bravo.content as content, 
+    COUNT(*) as count,
+    bravo_type.comment as comment
+    FROM bravo
+    INNER JOIN bravo_type
+    ON bravo_type.content = bravo.content
+    WHERE bravo.targetId = #{id}
+    GROUP BY content
+    ORDER BY count DESC
+  </select>
+  <select id="addBravo">
+    INSERT INTO bravo
+    (creatorId, creatorEmail, creatorIP, content, targetId, createTime)
+    VALUES
+    (#{creatorId}, #{creatorEmail}, #{creatorIP}, #{content}, #{targetId}, #{createTime})
+  </select>
+</mapper> 

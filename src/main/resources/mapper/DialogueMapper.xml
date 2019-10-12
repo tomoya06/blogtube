@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.heavelop.blogtube.dao.DialogueDao">
-  <select id="fetchRandom" resultType="map">
+  <select id="fetchRandom" resultType="DialogueFull">
     SELECT * FROM dialogue
     <if test="type != null">
       WHERE type = ${type}
@@ -10,7 +10,7 @@
     ORDER BY RAND()
     LIMIT 1
   </select>
-  <select id="fetchRandomBatch" resultType="Dialogue">
+  <select id="fetchRandomBatch" resultType="DialogueFull">
     SELECT * FROM dialogue
     <if test="type != null">
       WHERE type = ${type}
@@ -18,7 +18,7 @@
     ORDER BY RAND()
     LIMIT #{count}
   </select>
-  <select id="fetchBatchByUser" resultType="Dialogue">
+  <select id="fetchBatchByUser" resultType="DialogueFull">
     SELECT * FROM dialogue
     WHERE creatorId = ${creatorId}
     ORDER BY createTime DESC

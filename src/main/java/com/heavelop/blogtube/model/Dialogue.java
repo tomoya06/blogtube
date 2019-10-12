@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class Dialogue {
+  private Long id;
   private Long msgId;
   private String content;
   private Long createTime;

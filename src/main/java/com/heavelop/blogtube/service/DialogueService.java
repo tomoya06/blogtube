@@ -1,13 +1,14 @@
 package com.heavelop.blogtube.service;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import com.heavelop.blogtube.dao.DialogueDao;
 import com.heavelop.blogtube.dto.CommonFetchPaginationResult;
+import com.heavelop.blogtube.model.Bravo;
 import com.heavelop.blogtube.model.Dialogue;
+import com.heavelop.blogtube.model.DialogueFull;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,22 +19,29 @@ import lombok.val;
 public class DialogueService {
   @Autowired
   private DialogueDao dialogueDao;
+  @Autowired
+  private BravoService bravoService;
   
-  public Map<String, Object> fetchRandom(Integer type) {
-    return dialogueDao.fetchRandom(type);
+  public DialogueFull fetchRandom(Integer type) {
+    val dialogue = dialogueDao.fetchRandom(type);
+    this.appendDialogue(dialogue);
+    return dialogue;
   }
 
-  public List<Dialogue> fetchRandomBatch(Integer count, Integer type) {
+  public List<DialogueFull> fetchRandomBatch(Integer count, Integer type) {
     return dialogueDao.fetchRandomBatch(count, type);
   }
 
-  public CommonFetchPaginationResult<Dialogue> fetchBatchByUser(Long creatorId, Integer count, Integer from) {
+  public CommonFetchPaginationResult<DialogueFull> fetchBatchByUser(Long creatorId, Integer count, Integer from) {
     creatorId = creatorId == null ? 0 : creatorId;
     count = count == null ? 10 : count;
     from = from == null ? 0 : from;
     val result = dialogueDao.fetchBatchByUser(creatorId, count, from);
+    for (val dialogue: result) {
+      this.appendDialogue(dialogue);
+    }
     Integer total = dialogueDao.fetchCountByUser(creatorId);
-    return new CommonFetchPaginationResult<Dialogue>(total, count, from, result);
+    return new CommonFetchPaginationResult<DialogueFull>(total, count, from, result);
   }
 
   public void registeredUserSubmit(String content, Integer type, Long creatorId) {
@@ -47,5 +55,10 @@ public class DialogueService {
   private void submit(String content, Integer type, Long creatorId, String creatorEmail) {
     Long createTime = new Date().getTime();
     dialogueDao.submit(content, type, createTime, creatorId, creatorEmail);
+  }
+
+  private void appendDialogue(DialogueFull dialogueFull) {
+    List<Bravo> bravos = bravoService.fetchBravosByDialogue(dialogueFull.getId());
+    dialogueFull.setBravos(bravos);
   }
 }

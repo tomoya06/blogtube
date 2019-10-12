@@ -3,11 +3,16 @@ package com.heavelop.blogtube.controller;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import com.heavelop.blogtube.common.api.CommonResult;
 import com.heavelop.blogtube.common.api.RegExp;
 import com.heavelop.blogtube.dto.CommonFetchPaginationResult;
+import com.heavelop.blogtube.dto.DialogueBravoParam;
 import com.heavelop.blogtube.dto.DialogueSubmitParam;
 import com.heavelop.blogtube.model.Dialogue;
+import com.heavelop.blogtube.model.DialogueFull;
+import com.heavelop.blogtube.service.BravoService;
 import com.heavelop.blogtube.service.DialogueService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,16 +32,18 @@ import io.swagger.annotations.Api;
 public class DialogueController {
   @Autowired
   private DialogueService dialogueService;
+  @Autowired
+  private BravoService bravoService;
 
   @GetMapping("/random")
-  public CommonResult<Map<String, Object>> random(
+  public CommonResult<DialogueFull> random(
     @RequestParam(required = false) Integer type
   ) {
     return CommonResult.success(dialogueService.fetchRandom(type));
   }
 
   @GetMapping("/random/batch")
-  public CommonResult<List<Dialogue>> randomBatch(
+  public CommonResult<List<DialogueFull>> randomBatch(
     @RequestParam Integer count,
     @RequestParam(required = false) Integer type
   ) {
@@ -44,7 +51,7 @@ public class DialogueController {
   }
 
   @GetMapping("/fetch/user")
-  public CommonResult<CommonFetchPaginationResult<Dialogue>> fetchBatchByUser(
+  public CommonResult<CommonFetchPaginationResult<DialogueFull>> fetchBatchByUser(
     @RequestParam(required = false) Long id,
     @RequestParam(required = false) Integer size,
     @RequestParam(required = false) Integer from
@@ -65,4 +72,14 @@ public class DialogueController {
     );
     return CommonResult.success(true);
   }
+
+  @PostMapping(value = "/bravo", consumes = "application/json")
+  @ResponseBody
+  public CommonResult<Object> publicBravo(@RequestBody DialogueBravoParam param, HttpServletRequest request) {
+    String creatorIP = request.getRemoteAddr();
+    String content = param.getContent();
+    Long targetId = param.getTargetId();
+    bravoService.addBravo(null, null, creatorIP, content, targetId);
+    return CommonResult.success(true);
+  } 
 }

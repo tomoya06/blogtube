@@ -8,7 +8,9 @@
   </settings>
   <typeAliases>
     <typeAlias type="com.heavelop.blogtube.model.User" alias="User"/>
+    <typeAlias type="com.heavelop.blogtube.model.Bravo" alias="Bravo"/>
     <typeAlias type="com.heavelop.blogtube.model.Dialogue" alias="Dialogue"/>
+    <typeAlias type="com.heavelop.blogtube.model.DialogueFull" alias="DialogueFull"/>
     <typeAlias type="com.heavelop.blogtube.model.UserRole" alias="UserRole"/>
   </typeAliases>
 </configuration>
