@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.heavelop.blogtube.common.api.CommonResult;
 import com.heavelop.blogtube.common.api.RegExp;
+import com.heavelop.blogtube.dto.CommonFetchPaginationResult;
 import com.heavelop.blogtube.dto.DialogueSubmitParam;
 import com.heavelop.blogtube.model.Dialogue;
 import com.heavelop.blogtube.service.DialogueService;
@@ -40,6 +41,15 @@ public class DialogueController {
     @RequestParam(required = false) Integer type
   ) {
     return CommonResult.success(dialogueService.fetchRandomBatch(count, type));
+  }
+
+  @GetMapping("/fetch/user")
+  public CommonResult<CommonFetchPaginationResult<Dialogue>> fetchBatchByUser(
+    @RequestParam(required = false) Long id,
+    @RequestParam(required = false) Integer size,
+    @RequestParam(required = false) Integer from
+  ) {
+    return CommonResult.success(dialogueService.fetchBatchByUser(id, size, from));
   }
 
   @PostMapping(value = "/submit", consumes = "application/json")

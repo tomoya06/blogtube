@@ -19,6 +19,13 @@
     LIMIT #{count}
   </select>
   <select id="fetchBatchByUser" resultType="Dialogue">
-    SELECT * FROM 
+    SELECT * FROM dialogue
+    WHERE creatorId = ${creatorId}
+    ORDER BY createTime DESC
+    LIMIT ${count} OFFSET ${from}
+  </select>
+  <select id="fetchCountByUser" resultType="int">
+    SELECT COUNT(*) FROM dialogue
+    WHERE creatorId = ${creatorId}
   </select>
 </mapper>

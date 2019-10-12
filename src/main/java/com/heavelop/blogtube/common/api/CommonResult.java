@@ -3,35 +3,35 @@ package com.heavelop.blogtube.common.api;
 public class CommonResult<T> {
   private int code;
   private String status;
-  private T Data;
+  private T result;
 
-  public CommonResult(Integer code, String status, T Data) {
+  public CommonResult(Integer code, String status, T result) {
     this.code = code;
     this.status = status;
-    this.Data = Data;
+    this.result = result;
   }
 
-  public static <T> CommonResult<T> success(T data) {
+  public static <T> CommonResult<T> success(T result) {
     return new CommonResult<T>(
       ResultCode.SUCCESS.getCode(),
       ResultCode.SUCCESS.getMessage(),
-      data
+      result
     );
   }
 
-  public static <T> CommonResult<T> failed(T data) {
+  public static <T> CommonResult<T> failed(T result) {
     return new CommonResult<T>(
       ResultCode.FAILED.getCode(),
       ResultCode.FAILED.getMessage(),
-      data
+      result
     );
   }
 
-  public static <T> CommonResult<T> bad(T data) {
+  public static <T> CommonResult<T> bad(T result) {
     return new CommonResult<T>(
       ResultCode.BAD.getCode(),
       ResultCode.BAD.getMessage(),
-      data
+      result
     );
   }
 
@@ -43,8 +43,8 @@ public class CommonResult<T> {
     );
   }
 
-  public T getData() {
-    return Data;
+  public T getResult() {
+    return result;
   }
 
   public String getStatus() {
