@@ -28,4 +28,8 @@
     SELECT COUNT(*) FROM dialogue
     WHERE creatorId = ${creatorId}
   </select>
+  <select id="fetchDialogueTypeById" resultType="DialogueType">
+    SELECT * from dialogue_type
+    WHERE id = #{id}
+  </select>
 </mapper>

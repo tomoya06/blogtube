@@ -14,4 +14,7 @@
   <select id="findUserByEmail" resultType="User">
     SELECT * FROM user WHERE email = #{email}
   </select>
+  <select id="findUserById" resultType="User">
+    SELECT * FROM user WHERE id = #{id}
+  </select>
 </mapper>

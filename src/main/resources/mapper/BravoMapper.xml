@@ -14,10 +14,13 @@
     GROUP BY content
     ORDER BY count DESC
   </select>
-  <select id="addBravo">
+  <insert id="addBravo">
     INSERT INTO bravo
     (creatorId, creatorEmail, creatorIP, content, targetId, createTime)
     VALUES
     (#{creatorId}, #{creatorEmail}, #{creatorIP}, #{content}, #{targetId}, #{createTime})
+  </insert>
+  <select id="supportedBravos" resultType="BravoType">
+    SELECT * FROM bravo_type
   </select>
 </mapper> 

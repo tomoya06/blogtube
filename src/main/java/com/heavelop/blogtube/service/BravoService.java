@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.heavelop.blogtube.dao.BravoDao;
 import com.heavelop.blogtube.model.Bravo;
+import com.heavelop.blogtube.model.BravoType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,9 @@ public class BravoService {
     } else {
       bravoDao.addBravo(creatorId, creatorEmail, creatorIP, content, targetId, createTime);
     }
+  }
+
+  public List<BravoType> supportedBravos() {
+    return bravoDao.supportedBravos();
   }
 }

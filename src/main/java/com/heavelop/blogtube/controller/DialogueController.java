@@ -1,7 +1,6 @@
 package com.heavelop.blogtube.controller;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -10,7 +9,7 @@ import com.heavelop.blogtube.common.api.RegExp;
 import com.heavelop.blogtube.dto.CommonFetchPaginationResult;
 import com.heavelop.blogtube.dto.DialogueBravoParam;
 import com.heavelop.blogtube.dto.DialogueSubmitParam;
-import com.heavelop.blogtube.model.Dialogue;
+import com.heavelop.blogtube.model.BravoType;
 import com.heavelop.blogtube.model.DialogueFull;
 import com.heavelop.blogtube.service.BravoService;
 import com.heavelop.blogtube.service.DialogueService;
@@ -85,5 +84,10 @@ public class DialogueController {
     Long targetId = param.getTargetId();
     bravoService.addBravo(null, null, creatorIP, content, targetId);
     return CommonResult.success(true);
-  } 
+  }
+
+  @GetMapping("/allbravos")
+  public CommonResult<List<BravoType>> supportedBravos() {
+    return CommonResult.success(bravoService.supportedBravos());
+  }
 }

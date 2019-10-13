@@ -37,6 +37,17 @@ public class UserService {
     }
   }
 
+  public User getAdminUser() {
+    User admin = new User();
+    admin.setUsername("admin");
+    return admin;
+  }
+
+  public User findUserById(Long id) {
+    User targetUser = userDao.findUserById(id);
+    return targetUser;
+  }
+
   public User findUserByName(String username) {
     User targetUser = userDao.findUserByName(username);
     injectUserRolename(targetUser);

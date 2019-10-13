@@ -9,4 +9,5 @@ public interface UserDao {
   void registerUser(String username, String password, String email, Long createTime);
   User findUserByName(String username);
   User findUserByEmail(String email);
+  User findUserById(Long id);
 }
